@@ -1,2 +1,2 @@
-# kubernetes-hello-world
-A Kubernetes Hello World Project
+# kubernetes-hello-world-python-flask
+A Kubernetes Hello World Project for Python Flask
