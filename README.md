@@ -21,3 +21,10 @@ A Kubernetes Hello World Project for Python Flask.  This project uses [a simple 
 NAME             STATUS   ROLES    AGE   VERSION
 docker-desktop   Ready    master   30d   v1.19.3
 ```
+
+
+## References
+
+* Azure [Kubernetes deployment strategy](https://azure.microsoft.com/en-us/overview/kubernetes-deployment-strategy/)
+
+* Service [Cluster Config](https://kubernetes.io/docs/tasks/access-application-cluster/service-access-application-cluster/) YAML file
