@@ -11,10 +11,43 @@ A Kubernetes Hello World Project for Python Flask.  This project uses [a simple 
 ## Get Started
 
 * Create Python virtual environment `python3 -m venv ~/.kube-hello && source ~/.kube-hello/bin/activate`
+* Run `make all` to install python libraries, lint project, including `Dockerfile` and run tests
+
+## Build and Run Docker Container
+
+* Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+* To build the image locally do the following.
+
+`docker build -t flask-change:latest .` or run `make build` which has the same command.
+
+* To verify container run `docker image ls`
+
+* To run do the following:  `docker run -p 8080:8080 flask-change` or run `make run` which has the same command
+
+* In a separate terminal invoke the web service via curl, or run `make invoke` which has the same command 
+
+`curl http://127.0.0.1:8080/change/1/34`
+
+```bash
+[
+  {
+    "5": "quarters"
+  }, 
+  {
+    "1": "nickels"
+  }, 
+  {
+    "4": "pennies"
+  }
+]
+```
+
+* Stop the running docker container by using `control-c` command
 
 ## Running Kubernetes Locally
 
-* Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+* Verify Kubernetes is working via docker-desktop context
 
 ```bash
 (.kube-hello) ➜  kubernetes-hello-world-python-flask git:(main) kubectl get nodes
@@ -22,6 +55,26 @@ NAME             STATUS   ROLES    AGE   VERSION
 docker-desktop   Ready    master   30d   v1.19.3
 ```
 
+* Run the application in Kubernetes using the following command:  
+
+`kubectl apply -f kube-hello-change.yaml` or run `make run-kube` which has the same command
+
+* Verify the container is running
+
+`kubectl get pods`
+
+Here is the output:
+
+```bash
+NAME                            READY   STATUS    RESTARTS   AGE
+flask-change-7b7d7f467b-26htf   1/1     Running   0          8s
+flask-change-7b7d7f467b-fh6df   1/1     Running   0          7s
+flask-change-7b7d7f467b-fpsxr   1/1     Running   0          6s
+```
+
+Verify pods running the application
+
+`kubectl get pods --selector="run=load-balancer-flask"`
 
 ## References
 
