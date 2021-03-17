@@ -3,10 +3,10 @@ A Kubernetes Hello World Project for Python Flask.  This project uses [a simple 
 
 ## Assets in Repo
 
-* `Makefile`:  Builds project
-* `Dockerfile`:  Container configuration
-* `app.py`:  Flask app
-
+* `Makefile`:  [Builds project](https://github.com/noahgift/kubernetes-hello-world-python-flask/blob/main/Makefile)
+* `Dockerfile`:  [Container configuration](https://github.com/noahgift/kubernetes-hello-world-python-flask/blob/main/Dockerfile)
+* `app.py`:  [Flask app](https://github.com/noahgift/kubernetes-hello-world-python-flask/blob/main/app.py)
+* `kube-hello-change.yaml`: [Kubernetes YAML Config](https://github.com/noahgift/kubernetes-hello-world-python-flask/blob/main/kube-hello-change.yaml)
 
 ## Get Started
 
@@ -55,9 +55,48 @@ NAME             STATUS   ROLES    AGE   VERSION
 docker-desktop   Ready    master   30d   v1.19.3
 ```
 
-* Run the application in Kubernetes using the following command:  
+* Run the application in Kubernetes using the following command which tells Kubernetes to setup the load balanced service and run it:  
 
 `kubectl apply -f kube-hello-change.yaml` or run `make run-kube` which has the same command
+
+You can see from the config file that a load-balancer along with three nodes is the configured application.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-flask-change-service
+spec:
+  selector:
+    app: hello-python
+  ports:
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-python
+spec:
+  selector:
+    matchLabels:
+      app: hello-python
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hello-python
+    spec:
+      containers:
+      - name: flask-change
+        image: flask-change:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+```
 
 * Verify the container is running
 
