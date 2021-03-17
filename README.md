@@ -72,9 +72,52 @@ flask-change-7b7d7f467b-fh6df   1/1     Running   0          7s
 flask-change-7b7d7f467b-fpsxr   1/1     Running   0          6s
 ```
 
-Verify pods running the application
+* Describe the load balanced service:
 
-`kubectl get pods --selector="run=load-balancer-flask"`
+`kubectl describe services hello-python-service`
+
+You should see output similar to this:
+
+```bash
+Name:                     hello-python-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=hello-python
+Type:                     LoadBalancer
+IP Families:              <none>
+IP:                       10.101.140.123
+IPs:                      <none>
+LoadBalancer Ingress:     localhost
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  30301/TCP
+Endpoints:                10.1.0.27:8080,10.1.0.28:8080,10.1.0.29:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+
+Invoke the endpoint to curl it:  
+
+`make invoke`
+
+```bash
+curl http://127.0.0.1:8080/change/1/34
+[
+  {
+    "5": "quarters"
+  }, 
+  {
+    "1": "nickels"
+  }, 
+  {
+    "4": "pennies"
+  }
+]
+```
+
+To cleanup the deployment do the following:  `kubectl delete deployment
 
 ## References
 
