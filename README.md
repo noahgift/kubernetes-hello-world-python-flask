@@ -117,7 +117,7 @@ curl http://127.0.0.1:8080/change/1/34
 ]
 ```
 
-To cleanup the deployment do the following:  `kubectl delete deployment
+To cleanup the deployment do the following: `kubectl delete deployment hello-python`
 
 ## References
 
