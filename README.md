@@ -3,6 +3,21 @@ A Kubernetes Hello World Project for Python Flask.  This project uses [a simple 
 
 ## Assets in Repo
 
-* `Makefile`
-* `Dockerfile
-* `app.py
+* `Makefile`:  Builds project
+* `Dockerfile`:  Container configuration
+* `app.py`:  Flask app
+
+
+## Get Started
+
+* Create Python virtual environment `python3 -m venv ~/.kube-hello && source ~/.kube-hello/bin/activate`
+
+## Running Kubernetes Locally
+
+* Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+```bash
+(.kube-hello) ➜  kubernetes-hello-world-python-flask git:(main) kubectl get nodes
+NAME             STATUS   ROLES    AGE   VERSION
+docker-desktop   Ready    master   30d   v1.19.3
+```
