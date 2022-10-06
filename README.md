@@ -119,7 +119,7 @@ flask-change-7b7d7f467b-fpsxr   1/1     Running   0          6s
 
 * Describe the load balanced service:
 
-`kubectl describe services hello-python-service`
+`kubectl describe services hello-flask-change-service`
 
 You should see output similar to this:
 
