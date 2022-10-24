@@ -21,4 +21,14 @@ invoke:
 run-kube:
 	kubectl apply -f kube-hello-change.yaml
 
+destroy-kube:
+	 kubectl delete deployment hello-python
+
+describe-kube:
+	kubectl get nodes
+	kubectl get pods
+	kubectl describe services hello-flask-change-service
+
+describe: describe-nodes describe-pods describe-service
+	
 all: install lint test
